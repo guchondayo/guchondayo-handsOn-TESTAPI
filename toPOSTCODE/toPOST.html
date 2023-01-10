@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="a">非同期だよん</button>
+</body>
+<script>
+    let postURL = "https://zipcloud.ibsnet.co.jp/api/search"
+    let postCode = "?zipcode=2520318"
+    console.log(postURL + postCode)
+
+    // asyncは非同期を設定する範囲です
+    // awaitでは非同期の結果を受け皿とします
+    let result = ""
+    const asyncHaHidoukinohani = async function(){
+        let hidokinoKekkaWoUkeru = await fetch(postURL + postCode)
+        console.log(hidokinoKekkaWoUkeru)
+        let mouichidoHidokinoKekkaWoUkeru = await hidokinoKekkaWoUkeru.json()
+        console.log(mouichidoHidokinoKekkaWoUkeru)
+        console.log(mouichidoHidokinoKekkaWoUkeru.results)
+        console.log(mouichidoHidokinoKekkaWoUkeru.results[0])
+        result = mouichidoHidokinoKekkaWoUkeru
+    }
+    asyncHaHidoukinohani()
+    let btn = document.getElementById("a")
+    
+    // ここのresultは、先に読まれてしまうカラ
+    console.log(result)
+    //  ボタンを実装してあげると、ちゃんと反映される
+    
+    btn.addEventListener("click",function(){
+        console.log(result)
+    })
+    
+</script>
+</html>
