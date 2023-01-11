@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Chrome DevTools で console を開いてね</p>
+    <script>
+    // ①URLを用意する
+        const TEST_API = "http://localhost:8000/api.php";
+    // ②リクエストを送る作業をする
+        async function callApi() {
+         // ②−１fetchという住所を添えておねがいす
+        const res = await window.fetch(TEST_API
+        );
+        // ②−２速攻返ってくるので、JSONにしてあげる
+        const tests = await res.json();
+        console.log(tests);
+        }
+
+        callApi();
+
+        // https://pisuke-code.com/js-blocked-by-cors-policy-error/
+
+    </script>
+  </body>
+</html>
